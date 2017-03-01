@@ -1,5 +1,6 @@
 package org.seckill.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.seckill.entity.Seckill;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public interface SeckillDao {
      * @param killTime
      * @return
      */
-    int reduceNumber(Long seckillId,Date killTime);
+    int reduceNumber(@Param("seckillId") Long seckillId,@Param("killTime") Date killTime);
 
     /**
      * 查询一个秒杀库存
@@ -31,5 +32,5 @@ public interface SeckillDao {
      * @param limit 条数
      * @return
      */
-    List<Seckill> queryAll(Integer offet, Integer limit);
+    List<Seckill> queryAll(@Param("offset") Integer offset, @Param("limit") Integer limit);
 }
