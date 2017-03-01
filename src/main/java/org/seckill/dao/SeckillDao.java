@@ -28,7 +28,7 @@ public interface SeckillDao {
 
     /**
      * 分页查询
-     * @param offet 偏移量
+     * @param offset 偏移量
      * @param limit 条数
      * @return
      */
