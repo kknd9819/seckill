@@ -1,6 +1,5 @@
 package org.seckill.service.impl;
 
-import org.apache.ibatis.annotations.Param;
 import org.seckill.dao.SeckillDao;
 import org.seckill.dao.SuccessKilledDao;
 import org.seckill.dto.Exposer;
@@ -14,6 +13,8 @@ import org.seckill.exception.SeckillExcetpion;
 import org.seckill.service.SeckillService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import javax.annotation.Resource;
@@ -23,11 +24,12 @@ import java.util.List;
 /**
  * Created by X-man on 2017/3/2.
  */
+@Service
 public class SeckillServiceimpl implements SeckillService{
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private final String slat = "asdasKLJ87czxcSD_c**&??";
+    private final String slat = "KPdasKLJ87czxcSD_c**&??";
 
     @Resource
     private SeckillDao seckillDao;
@@ -64,8 +66,9 @@ public class SeckillServiceimpl implements SeckillService{
     }
 
     @Override
+    @Transactional
     public SeckillExecution executeSeckill( Long seckillId, Long userPhone,String md5) throws SeckillExcetpion, RepeatKillException, SeckillCloseException {
-        if(null == md5 || md5.equals(getMD5(seckillId))){ //如果改了md5 或者改了id 说明是异常
+        if(null == md5 || !md5.equals(getMD5(seckillId))){ //如果改了md5 或者改了id 说明是异常
             throw new SeckillExcetpion("秒杀的数据被重写");
         }
         //执行秒杀逻辑 ：减库存，记录购买行为
