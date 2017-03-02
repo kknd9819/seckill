@@ -1,7 +1,12 @@
 package org.seckill.service;
 
+import org.apache.ibatis.annotations.Param;
 import org.seckill.dto.Exposer;
+import org.seckill.dto.SeckillExecution;
 import org.seckill.entity.Seckill;
+import org.seckill.exception.RepeatKillException;
+import org.seckill.exception.SeckillCloseException;
+import org.seckill.exception.SeckillExcetpion;
 
 import java.util.List;
 
@@ -29,4 +34,13 @@ public interface SeckillService {
      * @param seckillId
      */
     Exposer exportSeckillUrl(Long seckillId);
+
+    /**
+     * 执行秒杀操作
+     * @param seckillId
+     * @param userPhone
+     * @param md5
+     */
+    SeckillExecution executeSeckill( Long seckillId, Long userPhone,String md5)
+     throws SeckillExcetpion,RepeatKillException,SeckillCloseException;
 }
