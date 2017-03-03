@@ -8,7 +8,9 @@
 <body>
  <div class="container">
      <div class="panel panel-default text-center">
-         <div class="panel-heading">${seckill.name}</div>
+         <div class="panel-heading">
+             <h2>${seckill.name}</h2>
+         </div>
      </div>
      <div class="panel-body">
 
