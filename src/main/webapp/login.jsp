@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>index</title>
+    <title>login</title>
 </head>
 <body>
-    hello zhengzhuo
+    please login
 </body>
 </html>

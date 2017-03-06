@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="loginUrl" value="/login.jsp"/>
+        <property name="securityManager" ref="securityManager"/>
+        <property name="unauthorizedUrl" value="/refuse.jsp"/>
+        <!--建议不配置，不配置默认请求上次请求路径 -->
+        <property name="successUrl" value="/WEB-INF/jsp/index.jsp"/>
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 从上往下执行，建议把/** 配置到最下面 -->
+                <!-- 对静态资源设置为匿名访问 -->
+                /images/** = anon
+                /js/** = anon
+                /css/** = anon
+                /logout = logout
+                /** = authc
+            </value>
+        </property>
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+    <bean id="myRealm" class="org.seckill.shiro.MyRealm"></bean>
+</beans>
